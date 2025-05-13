@@ -14,7 +14,7 @@ function Team() {
         <div className="col-6 p-3 text-center">
           <img
             src="media/mypic.jpg"
-            style={{ borderRadius: "100%", width: "50%" }}
+            style={{ borderRadius: "100%", width: "50%" }} alt=""
           />
           <h4 className="mt-5">Nithin Kamath</h4>
           <h6>Founder, CEO</h6>
@@ -26,8 +26,8 @@ function Team() {
 Currently, I am actively engaged in projects involving AI-driven applications, full-stack web development. I enjoy building scalable solutions with MERN stack, Next.js, and integrating AI-powered tools. My goal is to leverage technology to create impactful solutions that bridge gaps and enhance user experiences.
           </p>
           <p>
-            Connect on <a href="">Homepage</a> / <a href="">TradingQnA</a> /{" "}
-            <a href="">Twitter</a>
+            Connect on <a href="#">Homepage</a> / <a href="#">TradingQnA</a> /{" "}
+            <a href="#">Twitter</a>
           </p>
         </div>
       </div>

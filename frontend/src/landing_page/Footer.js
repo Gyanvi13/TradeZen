@@ -6,7 +6,7 @@ function Footer() {
       <div className="container border-top mt-5">
         <div className="row mt-5">
           <div className="col">
-            <img src="media/logo.svg" style={{ width: "50%" }} />
+            <img src="media/logo.svg" style={{ width: "50%" }} alt=""/>
             <p>
               &copy; 2010 - 2024, Not Zerodha Broking Ltd. All rights reserved.
             </p>
@@ -14,47 +14,47 @@ function Footer() {
           <div className="col" >
             <ul style={ { listStyleType: 'none'}}>
             <li style={{ fontSize: '1.125rem',fontWeight: 500,marginBottom: '10px'}}>Company</li>
-            <a href="" className=" text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>About</a>
+            <a href="#" className=" text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>About</a>
             <br />
-            <a href="" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Products</a>
+            <a href="#" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Products</a>
             <br />
-            <a href="" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Pricing</a>
+            <a href="#" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Pricing</a>
             <br />
-            <a href="" className="text-muted"  style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Referral programme</a>
+            <a href="#" className="text-muted"  style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Referral programme</a>
             <br />
-            <a href="" className="text-muted"  style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Careers</a>
+            <a href="#" className="text-muted"  style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Careers</a>
             <br />
-            <a href="" className="text-muted"  style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Zerodha.tech</a>
+            <a href="#" className="text-muted"  style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Zerodha.tech</a>
             <br />
-            <a href="" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Press & media</a>
+            <a href="#" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Press & media</a>
             <br />
-            <a href="" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Zerodha cares (CSR)</a>
+            <a href="#" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Zerodha cares (CSR)</a>
             </ul>
             <br />
           </div>
           <div className="col" >
           <ul style={ {listStyleType: 'none',}}>
             <li style={{ fontSize: '1.125rem',fontWeight: 500,marginBottom: '10px'}}>Support</li>
-            <a href="" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Contact</a>
+            <a href="#" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Contact</a>
             <br />
-            <a href="" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Support portal</a>
+            <a href="#" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Support portal</a>
             <br />
-            <a href="" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Z-Connect blog</a>
+            <a href="#" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Z-Connect blog</a>
             <br />
-            <a href="" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>List of charges</a>
+            <a href="#" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>List of charges</a>
             <br />
-            <a href="" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Downloads & resources</a>
+            <a href="#" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Downloads & resources</a>
             </ul>
             <br />
           </div>
           <div className="col">
           <ul style={ { listStyleType: 'none',}}>
             <li style={{ fontSize: '1.125rem',fontWeight: 500,marginBottom: '10px'}}>Account</li>
-            <a href="" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Open an account</a>
+            <a href="#" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Open an account</a>
             <br />
-            <a href="" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Fund transfer</a>
+            <a href="#" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>Fund transfer</a>
             <br />
-            <a href="" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>60 day challenge</a>
+            <a href="#" className="text-muted" style={{textDecoration:"none", lineHeight: "2",fontWeight:"500"}}>60 day challenge</a>
             </ul>
             <br />
           </div>
