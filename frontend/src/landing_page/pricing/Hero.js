@@ -27,7 +27,7 @@ import React from "react";
            </p>
          </div>
          <div className="col-4 p-4">
-           <img src="media/pricingEquity.svg" alt=""/>
+           <img src="media/pricingEquity.svg" alt="price"/>
            <h1 className="fs-3">Free direct MF</h1>
            <p className="text-muted">
              All direct mutual fund investments are absolutely free — ₹ 0

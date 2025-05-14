@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 function Hero() {
   return (
     <div className="container">
@@ -39,9 +39,9 @@ function Hero() {
             community initiatives to empower retail traders and investors.
           </p>
           <p>
-            <a href="#" style={{ textDecoration: "none" }}>
+            <Link to="*" style={{ textDecoration: "none" }}>
               Rainmatter
-            </a>
+            </Link>
             , our fintech fund and incubator, has invested in several fintech
             startups with the goal of growing the Indian capital markets.
           </p>
