@@ -2,11 +2,12 @@
 [build]
   base = "frontend"
   command = "npm run build"
-  publish = "frontend/build"
+  publish = "build"
 
+# Optional: remove or fix this if you're not using functions
+#[functions]
+#  directory = "netlify/functions"
 
-
-  ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.
   #[[redirects]]
   #  from = "/*"
