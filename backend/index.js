@@ -1,14 +1,19 @@
 require("dotenv").config();
- 
+
  const express = require("express");
  const mongoose = require("mongoose");
  const bodyParser = require("body-parser");
  const cors = require("cors");
+ const cookieParser = require("cookie-parser");
+ const authRoute = require("./Routes/AuthRoute");
+const jwt = require("jsonwebtoken");
+
  
  const { HoldingsModel } = require("./model/HoldingsModel");
  
  const { PositionsModel } = require("./model/PositionsModel");
  const { OrdersModel } = require("./model/OrdersModel");
+const User = require("../Models/UserModel");
  
  const PORT = process.env.PORT || 3002;
  const uri = process.env.MONGO_URL;
@@ -17,6 +22,31 @@ require("dotenv").config();
  
  app.use(cors());
  app.use(bodyParser.json());
+
+app.use(cookieParser());
+
+app.use(express.json());
+
+app.use("/", authRoute);
+
+
+
+
+module.exports.userVerification = (req, res) => {
+  const token = req.cookies.token
+  if (!token) {
+    return res.json({ status: false })
+  }
+  jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
+    if (err) {
+     return res.json({ status: false })
+    } else {
+      const user = await User.findById(data.id)
+      if (user) return res.json({ status: true, user: user.username })
+      else return res.json({ status: false })
+    }
+  })
+}
  
  // app.get("/addHoldings", async (req, res) => {
  //   let tempHoldings = [
