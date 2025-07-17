@@ -29,14 +29,14 @@ const Signup = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:3002/signup",
+        "https://tradezen.onrender.com/signup",
         { ...inputValue },
         { withCredentials: true }
       );
       if (data.success) {
         handleSuccess(data.message);
         setTimeout(() => {
-          window.location.href = "http://localhost:3000/dashboard";
+          window.location.href =  `${process.env.REACT_APP_DASHBOARD_URL}`;
         }, 1000); 
       } else {
         handleError(data.message || "Signup failed.");
