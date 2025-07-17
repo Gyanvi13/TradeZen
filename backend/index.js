@@ -4,23 +4,28 @@ require("dotenv").config();
  const mongoose = require("mongoose");
  const bodyParser = require("body-parser");
  const cors = require("cors");
- const cookieParser = require("cookie-parser");
- const authRoute = require("./Routes/AuthRoute");
-const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+const authRoute = require("./Routes/AuthRoute");
 
- 
+
+ const requireAuth = require("./Middlewares/AuthMiddleware");
  const { HoldingsModel } = require("./model/HoldingsModel");
  
  const { PositionsModel } = require("./model/PositionsModel");
  const { OrdersModel } = require("./model/OrdersModel");
-const User = require("../Models/UserModel");
+ const User = require("./model/UserModel");
+
  
  const PORT = process.env.PORT || 3002;
  const uri = process.env.MONGO_URL;
+ console.log("Mongo URI:", uri); 
  
  const app = express();
  
- app.use(cors());
+ app.use(cors({
+  origin: true,
+  credentials: true,
+}));
  app.use(bodyParser.json());
 
 app.use(cookieParser());
@@ -32,22 +37,6 @@ app.use("/", authRoute);
 
 
 
-module.exports.userVerification = (req, res) => {
-  const token = req.cookies.token
-  if (!token) {
-    return res.json({ status: false })
-  }
-  jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
-    if (err) {
-     return res.json({ status: false })
-    } else {
-      const user = await User.findById(data.id)
-      if (user) return res.json({ status: true, user: user.username })
-      else return res.json({ status: false })
-    }
-  })
-}
- 
  // app.get("/addHoldings", async (req, res) => {
  //   let tempHoldings = [
  //     {
@@ -216,32 +205,36 @@ module.exports.userVerification = (req, res) => {
  //   });
  //   res.send("Done!");
  // });
+
+app.get("/allHoldings", async (req, res) => {
+  let allHoldings = await HoldingsModel.find({});
+  res.json(allHoldings);
+});
+
+app.get("/allPositions", async (req, res) => {
+  let allPositions = await PositionsModel.find({});
+  res.json(allPositions);
+});
+
+app.post("/newOrder", async (req, res) => {
+  let newOrder = new OrdersModel({
+    name: req.body.name,
+    qty: req.body.qty,
+    price: req.body.price,
+    mode: req.body.mode,
+  });
+
+  newOrder.save();
+
+  res.send("Order saved!");
+});
  
- app.get("/allHoldings", async (req, res) => {
-   let allHoldings = await HoldingsModel.find({});
-   res.json(allHoldings);
- });
- 
- app.get("/allPositions", async (req, res) => {
-   let allPositions = await PositionsModel.find({});
-   res.json(allPositions);
- });
- 
- app.post("/newOrder", async (req, res) => {
-   let newOrder = new OrdersModel({
-     name: req.body.name,
-     qty: req.body.qty,
-     price: req.body.price,
-     mode: req.body.mode,
-   });
- 
-   newOrder.save();
- 
-   res.send("Order saved!");
- });
- 
- app.listen(PORT, () => {
-   console.log("App started!");
-   mongoose.connect(uri);
-   console.log("DB started!");
- });
+app.listen(PORT, async () => {
+  try {
+    await mongoose.connect(uri);
+    console.log("DB started!");
+    console.log("App started on port", PORT);
+  } catch (error) {
+    console.error("DB connection error:", error);
+  }
+});

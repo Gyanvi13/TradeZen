@@ -16,12 +16,12 @@ function Team() {
             src="media/mypic.jpg"
             style={{ borderRadius: "100%", width: "50%" }} alt="mypic"
           />
-          <h4 className="mt-5">Nithin Kamath</h4>
-          <h6>Founder, CEO</h6>
+          <h4 className="mt-5">Gyanvi Mehrotra</h4>
+          <h6>Full Stack Developer</h6>
         </div>
         <div className="col-6 p-3">
           <p>
-          I am a passionate third-year B.Tech student with a keen interest in exploring and working with cutting-edge technologies. I thrive on solving real-world problems using the latest innovations in Artificial Intelligence (AI), Machine Learning (ML),  Cloud Computing . I am a fill-stack developer  enhancing and polishing my skills.
+          I am a passionate third-year B.Tech student with a keen interest in exploring and working with cutting-edge technologies. I thrive on solving real-world problems using the latest innovations in Artificial Intelligence (AI), Machine Learning (ML),  Cloud Computing . I am a full-stack developer  enhancing and polishing my skills.
 
 Currently, I am actively engaged in projects involving AI-driven applications, full-stack web development. I enjoy building scalable solutions with MERN stack, Next.js, and integrating AI-powered tools. My goal is to leverage technology to create impactful solutions that bridge gaps and enhance user experiences.
           </p>
