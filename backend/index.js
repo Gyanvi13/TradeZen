@@ -21,7 +21,6 @@ const authRoute = require("./Routes/AuthRoute");
  console.log("Mongo URI:", uri); 
  
  const app = express();
- const cors = require('cors');
 
 app.use(cors({
   origin: 'https://tradezen-stock-trading.netlify.app',
