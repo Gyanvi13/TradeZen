@@ -36,7 +36,7 @@ const Login = () => {
       if (data.success) {
         handleSuccess(data.message);
         setTimeout(() => {
-          window.location.href =  `${process.env.REACT_APP_DASHBOARD_URL}`;
+          window.location.href = "https://magnificent-nougat-0b2733.netlify.app";
         }, 1000); 
       } else {
         handleError(data.message || "Login failed.");
