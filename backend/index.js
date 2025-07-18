@@ -23,7 +23,7 @@ const authRoute = require("./Routes/AuthRoute");
  const app = express();
 
 app.use(cors({
-  origin: 'https://tradezen.onrender.com',
+  origin: 'tradezen-stock-trading.netlify.app',
   credentials: true
 }));
 
