@@ -1,37 +1,33 @@
 require("dotenv").config();
 
- const express = require("express");
- const mongoose = require("mongoose");
- const bodyParser = require("body-parser");
- const cors = require("cors");
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
+
 const authRoute = require("./Routes/AuthRoute");
+const requireAuth = require("./Middlewares/AuthMiddleware");
 
+const { HoldingsModel } = require("./model/HoldingsModel");
+const { PositionsModel } = require("./model/PositionsModel");
+const { OrdersModel } = require("./model/OrdersModel");
+const User = require("./model/UserModel");
 
- const requireAuth = require("./Middlewares/AuthMiddleware");
- const { HoldingsModel } = require("./model/HoldingsModel");
- 
- const { PositionsModel } = require("./model/PositionsModel");
- const { OrdersModel } = require("./model/OrdersModel");
- const User = require("./model/UserModel");
+const PORT = process.env.PORT || 3002;
+const uri = process.env.MONGO_URL;
 
- 
- const PORT = process.env.PORT || 3002;
- const uri = process.env.MONGO_URL;
- console.log("Mongo URI:", uri); 
- 
- const cors = require("cors");
+console.log("Mongo URI:", uri);
+
+const app = express();
 
 app.use(cors({
-  origin: "https://tradezen-stock-trading.netlify.app", 
+  origin: "https://tradezen-stock-trading.netlify.app",
   credentials: true
 }));
 
-
- app.use(bodyParser.json());
-
+app.use(bodyParser.json());
 app.use(cookieParser());
-
 app.use(express.json());
 
 app.use("/", authRoute);
