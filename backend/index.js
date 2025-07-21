@@ -7,7 +7,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const authRoute = require("./Routes/AuthRoute");
-const requireAuth = require("./Middlewares/AuthMiddleware");
+const requireAuth = require("./Middlewares/requireAuth");
 
 const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
@@ -204,17 +204,17 @@ app.use("/", authRoute);
  //   res.send("Done!");
  // });
 
-app.get("/allHoldings", async (req, res) => {
+app.get("/allHoldings",requireAuth, async (req, res) => {
   let allHoldings = await HoldingsModel.find({});
   res.json(allHoldings);
 });
 
-app.get("/allPositions", async (req, res) => {
+app.get("/allPositions", requireAuth, async (req, res) => {
   let allPositions = await PositionsModel.find({});
   res.json(allPositions);
 });
 
-app.post("/newOrder", async (req, res) => {
+app.post("/newOrder", requireAuth, async (req, res) => {
   let newOrder = new OrdersModel({
     name: req.body.name,
     qty: req.body.qty,

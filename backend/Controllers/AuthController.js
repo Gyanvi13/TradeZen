@@ -15,8 +15,9 @@ module.exports.Signup = async (req, res, next) => {
     const user = await User.create({ email, password, username, createdAt });
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
-      withCredentials: true,
-      httpOnly: false,
+       httpOnly: true,
+      secure: true,      // ✅ important for Render
+      sameSite: "None" 
     });
     res
       .status(201)
@@ -24,6 +25,7 @@ module.exports.Signup = async (req, res, next) => {
     next();
   } catch (error) {
     console.error(error);
+     res.status(500).json({ success: false, message: "Server error, please try again later." });
   }
 };
 module.exports.Login = async (req, res, next) => {
@@ -42,12 +44,14 @@ module.exports.Login = async (req, res, next) => {
     }
      const token = createSecretToken(user._id);
      res.cookie("token", token, {
-       withCredentials: true,
-       httpOnly: false,
+        httpOnly: true,
+      secure: true,      // ✅ important for Render
+      sameSite: "None" 
      });
      res.status(201).json({ message: "User logged in successfully", success: true });
      next()
   } catch (error) {
     console.error(error);
+     res.status(500).json({ success: false, message: "Server error, please try again later." });
   }
 }

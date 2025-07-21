@@ -7,13 +7,17 @@ import React, { useState, useEffect } from "react";
  const Holdings = () => {
    const [allHoldings, setAllHoldings] = useState([]);
  
-   useEffect(() => {
-     axios.get("https://tradezen.onrender.com/allHoldings").then((res) => {
-       // console.log(res.data);
-       setAllHoldings(res.data);
-     });
-   }, []);
- 
+ useEffect(() => {
+  axios.get("https://tradezen.onrender.com/allHoldings", {
+    withCredentials: true
+  })
+  .then((res) => {
+    setAllHoldings(res.data);
+  })
+  .catch((err) => {
+    console.error("Failed to fetch holdings:", err);
+  });
+}, []);
    // const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
    const labels = allHoldings.map((subArray) => subArray["name"]);
  
