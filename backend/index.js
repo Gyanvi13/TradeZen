@@ -22,7 +22,10 @@ console.log("Mongo URI:", uri);
 const app = express();
 
 app.use(cors({
-  origin: "https://tradezen-stock-trading.netlify.app",
+  origin: [
+    "https://tradezen-stock-trading.netlify.app",
+    "https://magnificent-nougat-0b2733.netlify.app"
+  ],
   credentials: true
 }));
 
