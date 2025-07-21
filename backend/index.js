@@ -26,7 +26,9 @@ app.use(cors({
     "https://tradezen-stock-trading.netlify.app",
     "https://magnificent-nougat-0b2733.netlify.app"
   ],
-  credentials: true
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  optionsSuccessStatus: 200, // For legacy browser support
 }));
 
 app.use(bodyParser.json());
