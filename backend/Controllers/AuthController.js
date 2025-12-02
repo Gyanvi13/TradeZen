@@ -7,6 +7,13 @@ module.exports.Signup = async (req, res) => {
   try {
     const { email, password, username, createdAt } = req.body;
 
+    // Check DB connection state before attempting DB operations
+    const mongoose = require('mongoose');
+    if (!mongoose.connection || mongoose.connection.readyState !== 1) {
+      console.error('Signup attempted while DB not connected. readyState=', mongoose.connection && mongoose.connection.readyState);
+      return res.status(503).json({ success: false, message: 'Service temporarily unavailable. Database not connected.' });
+    }
+
     // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {

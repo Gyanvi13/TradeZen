@@ -33,6 +33,24 @@ app.use(cors({
 }));
 
 // AUTH ROUTES
+// Optional debug logger for auth routes. Enable by setting DEBUG_REQUESTS=true in env.
+if (process.env.DEBUG_REQUESTS === 'true') {
+  app.use('/auth', (req, res, next) => {
+    try {
+      const safeHeaders = { ...req.headers };
+      if (safeHeaders.cookie) safeHeaders.cookie = '[REDACTED]';
+      console.log('[AUTH DEBUG] %s %s', req.method, req.originalUrl);
+      console.log('[AUTH DEBUG] headers:', JSON.stringify(safeHeaders));
+      if (req.body && Object.keys(req.body).length) {
+        console.log('[AUTH DEBUG] body:', JSON.stringify(req.body));
+      }
+    } catch (err) {
+      console.error('Auth debug logger error:', err);
+    }
+    next();
+  });
+}
+
 // Mount auth routes under /auth to match frontend requests
 app.use("/auth", authRoute);
 
