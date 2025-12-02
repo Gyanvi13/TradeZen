@@ -265,12 +265,25 @@ app.post("/newOrder", requireAuth, async (req, res) => {
   }
 });
  
-app.listen(PORT, async () => {
-  try {
-    await mongoose.connect(uri);
-    console.log("DB started!");
-    console.log("App started on port", PORT);
-  } catch (error) {
-    console.error("DB connection error:", error);
+// Start server only after successful DB connection
+async function startServer() {
+  if (!uri) {
+    console.error('MONGO_URL is not set. Set MONGO_URL in environment before starting the server.');
+    process.exit(1);
   }
-});
+
+  try {
+    await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    console.log('DB started!');
+
+    app.listen(PORT, () => {
+      console.log('App started on port', PORT);
+    });
+  } catch (error) {
+    console.error('DB connection error:', error);
+    // Exit process so deployment can retry/restart
+    process.exit(1);
+  }
+}
+
+startServer();
