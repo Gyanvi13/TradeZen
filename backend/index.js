@@ -33,6 +33,7 @@ app.use(cors({
 }));
 
 // AUTH ROUTES
+// Mount auth routes under /auth to match frontend requests
 app.use("/auth", authRoute);
 
 
