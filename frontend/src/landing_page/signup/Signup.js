@@ -29,7 +29,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "https://tradezen.onrender.com/signup",
+        "https://tradezen.onrender.com/auth/signup",
         { ...inputValue },
         { withCredentials: true }
       );

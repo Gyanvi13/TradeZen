@@ -2,12 +2,12 @@ require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+// Removed bodyParser, use express.json instead
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const authRoute = require("./Routes/AuthRoute");
-const requireAuth = require("./Middlewares/requireAuth");
+const { requireAuth } = require("./Middlewares/AuthMiddleware");
 
 const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
@@ -21,21 +21,19 @@ console.log("Mongo URI:", uri);
 
 const app = express();
 
+app.use(express.json());
+app.use(cookieParser());
+
 app.use(cors({
   origin: [
     "https://tradezen-stock-trading.netlify.app",
     "https://magnificent-nougat-0b2733.netlify.app"
   ],
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  optionsSuccessStatus: 200, // For legacy browser support
 }));
 
-app.use(bodyParser.json());
-app.use(cookieParser());
-app.use(express.json());
-
-app.use("/", authRoute);
+// AUTH ROUTES
+app.use("/auth", authRoute);
 
 
 
@@ -209,27 +207,38 @@ app.use("/", authRoute);
  //   res.send("Done!");
  // });
 
-app.get("/allHoldings",requireAuth, async (req, res) => {
-  let allHoldings = await HoldingsModel.find({});
-  res.json(allHoldings);
+app.get("/allHoldings", requireAuth, async (req, res) => {
+  try {
+    let allHoldings = await HoldingsModel.find({});
+    res.json(allHoldings);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching holdings" });
+  }
 });
+// Repeat for other DB routes
 
 app.get("/allPositions", requireAuth, async (req, res) => {
-  let allPositions = await PositionsModel.find({});
-  res.json(allPositions);
+  try {
+    let allPositions = await PositionsModel.find({});
+    res.json(allPositions);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching positions" });
+  }
 });
 
 app.post("/newOrder", requireAuth, async (req, res) => {
-  let newOrder = new OrdersModel({
-    name: req.body.name,
-    qty: req.body.qty,
-    price: req.body.price,
-    mode: req.body.mode,
-  });
-
-  newOrder.save();
-
-  res.send("Order saved!");
+  try {
+    const { name, qty, price, mode } = req.body;
+    if (!name || !qty || !price || !mode) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+    let newOrder = new OrdersModel({ name, qty, price, mode });
+    await newOrder.save();
+    res.status(201).json({ message: "Order saved!", order: newOrder });
+  } catch (error) {
+    console.error("Error saving order:", error);
+    res.status(500).json({ message: "Error saving order" });
+  }
 });
  
 app.listen(PORT, async () => {

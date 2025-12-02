@@ -29,7 +29,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "https://tradezen.onrender.com/login",
+        "https://tradezen.onrender.com/auth/login",
         inputValue,
         { withCredentials: true }
       );
