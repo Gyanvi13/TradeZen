@@ -38,11 +38,13 @@ module.exports.Signup = async (req, res) => {
     });
 
   } catch (error) {
-    console.error("Signup error:", error);
-    if (error.code === 11000) {
+    // Log full stack for debugging (remove or reduce in production logs)
+    console.error("Signup error:", error && error.stack ? error.stack : error);
+    if (error && error.code === 11000) {
       return res.status(400).json({ success: false, message: "Email already registered." });
     }
-    res.status(500).json({ success: false, message: "Server error, please try again later." });
+    // Return minimal error message to client for debugging; change this in production
+    return res.status(500).json({ success: false, message: error && error.message ? error.message : "Server error, please try again later." });
   }
 };
 
@@ -83,7 +85,7 @@ module.exports.Login = async (req, res) => {
     res.status(200).json({ message: "User logged in successfully", success: true });
 
   } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({ success: false, message: "Server error, please try again later." });
+    console.error("Login error:", error && error.stack ? error.stack : error);
+    return res.status(500).json({ success: false, message: error && error.message ? error.message : "Server error, please try again later." });
   }
 };

@@ -36,6 +36,11 @@ app.use(cors({
 // Mount auth routes under /auth to match frontend requests
 app.use("/auth", authRoute);
 
+// Health check for deployment/debugging
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', ts: Date.now() });
+});
+
 
 
 
